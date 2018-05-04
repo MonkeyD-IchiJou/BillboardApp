@@ -88,6 +88,7 @@ class App extends React.Component {
 
     const { config, slides, height, width } = this.state;
 
+    // config for react slick
     const settings = {
       infinite: true,
       autoplaySpeed: config.timeout,
