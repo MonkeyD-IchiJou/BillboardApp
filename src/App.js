@@ -12,8 +12,6 @@ class App extends React.Component {
       width: 0,
       height: 0
     };
-
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +23,7 @@ class App extends React.Component {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
-  updateWindowDimensions() {
+  updateWindowDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
@@ -75,8 +73,7 @@ class App extends React.Component {
                   <div style={{
                     background: "url(" + content.value + ") no-repeat center center",
                     width: "100%",
-                    height: "100%",
-                    position: 'relative'
+                    height: "100%"
                   }} />
 
                 </div>
