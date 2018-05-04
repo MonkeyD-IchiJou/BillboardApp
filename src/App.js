@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import { Grid } from 'semantic-ui-react'
+import data from './data.json'
 
 class App extends React.Component {
 
@@ -9,63 +10,7 @@ class App extends React.Component {
 
     this.state = {
       width: 0,
-      height: 0,
-      config: {
-        timeout: 3000, // autoplay speed in milliseconds
-        speed: 500// animation speed in milliseconds
-      },
-      slides: [
-        {
-          name: "000",
-          contents: [
-            {
-              type: "image",
-              value: "https://i.imgur.com/NA4fv8t.jpg"
-            }
-          ]
-        },
-        {
-          name: "003",
-          contents: [
-            {
-              type: "url",
-              value: "https://wework.com"
-            }
-          ]
-        },
-
-        {
-          name: "002",
-          contents: [
-            {
-              type: "image",
-              value: "https://i.imgur.com/FksWs05.jpg"
-            },
-            {
-              type: "image",
-              value: "https://i.imgur.com/rhWfYIh.jpg"
-            }
-          ]
-        },
-        {
-          name: "001",
-          contents: [
-            {
-              type: "url",
-              value: "https://mycompany.looker.com/looks/JRJTR5dDYZRVX56vyrmnpKn2HRbnhsMq.txt?apply_formatting=true&apply_vis=true"
-            }
-          ]
-        },
-        {
-          name: "004",
-          contents: [
-            {
-              type: "image",
-              value: "https://i.imgur.com/rhWfYIh.jpg"
-            }
-          ]
-        }
-      ]
+      height: 0
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -86,7 +31,8 @@ class App extends React.Component {
 
   render() {
 
-    const { config, slides, height, width } = this.state;
+    const { height, width } = this.state;
+    const { config, slides } = data;
 
     // config for react slick
     const settings = {
@@ -112,7 +58,7 @@ class App extends React.Component {
       let contentsRender = [];
 
       // loop through each contents in this slide
-      slide.contents.forEach((content) => {
+      slide.contents.forEach((content, index) => {
 
         // prepare the UI accordingly based on the content type
         switch (content.type) {
