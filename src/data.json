@@ -1,0 +1,57 @@
+{
+    "config": {
+        "timeout": 3000,
+        "speed": 500
+    },
+    "slides": [
+        {
+            "name": "000",
+            "contents": [
+                {
+                    "type": "image",
+                    "value": "https://i.imgur.com/NA4fv8t.jpg"
+                }
+            ]
+        },
+        {
+            "name": "003",
+            "contents": [
+                {
+                    "type": "url",
+                    "value": "https://wework.com"
+                }
+            ]
+        },
+        {
+            "name": "002",
+            "contents": [
+                {
+                    "type": "image",
+                    "value": "https://i.imgur.com/FksWs05.jpg"
+                },
+                {
+                    "type": "image",
+                    "value": "https://i.imgur.com/rhWfYIh.jpg"
+                }
+            ]
+        },
+        {
+            "name": "001",
+            "contents": [
+                {
+                    "type": "url",
+                    "value": "https://mycompany.looker.com/looks/JRJTR5dDYZRVX56vyrmnpKn2HRbnhsMq.txt?apply_formatting=true&apply_vis=true"
+                }
+            ]
+        },
+        {
+            "name": "004",
+            "contents": [
+                {
+                    "type": "image",
+                    "value": "https://i.imgur.com/rhWfYIh.jpg"
+                }
+            ]
+        }
+    ]
+}
