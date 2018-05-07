@@ -24,7 +24,7 @@ class App extends React.Component {
       .then((resp) => resp.json()) // Transform the data into json
       .then((data) => {
         // set the data into my state
-        this.setState({data: data})
+        this.setState({ data: data })
       })
       .catch((e) => {
         // if got any errors
@@ -87,31 +87,27 @@ class App extends React.Component {
             case 'image':
               // prepare image ui
               contentsRender.push(
-                <div key={index} style={{ height: contentHeight, backgroundColor: 'black' }}>
-                  <div style={{
-                    background: "url(" + content.value + ") no-repeat center center",
-                    width: "100%",
-                    height: "100%",
-                    backgroundSize: content.size ? content.size : '100%'
-                  }} />
-                </div>
+                <div style={{
+                  background: "url(" + content.value + ") no-repeat center center",
+                  width: "100%",
+                  height: contentHeight,
+                  backgroundSize: content.size ? content.size : '100%'
+                }} />
               );
               break;
 
             case 'url':
               // prepare url ui
               contentsRender.push(
-                <div key={index} align="center">
-                  <iframe
-                    title="adf"
-                    width='100%'
-                    height={contentHeight}
-                    frameBorder="0"
-                    marginHeight="0"
-                    marginWidth="0"
-                    src={content.value}
-                  />
-                </div>
+                <iframe
+                  title="adf"
+                  width='100%'
+                  height={contentHeight}
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  src={content.value}
+                />
               );
               break;
 
@@ -156,7 +152,7 @@ class App extends React.Component {
       );
     }
     else {
-      return(<div>loading</div>)
+      return (<div>loading</div>)
     }
   }
 }
