@@ -28,10 +28,6 @@
                 {
                     "type": "image",
                     "value": "https://i.imgur.com/FksWs05.jpg"
-                },
-                {
-                    "type": "image",
-                    "value": "https://i.imgur.com/NA4fv8t.jpg"
                 }
             ]
         },
@@ -41,6 +37,10 @@
                 {
                     "type": "url",
                     "value": "https://mycompany.looker.com/looks/JRJTR5dDYZRVX56vyrmnpKn2HRbnhsMq.txt?apply_formatting=true&apply_vis=true"
+                },
+                {
+                    "type": "image",
+                    "value": "https://i.imgur.com/rhWfYIh.jpg"
                 }
             ]
         },
