@@ -62,8 +62,8 @@ class App extends React.Component {
         slidesToScroll: 1
       };
 
-      const offSetFullHeight = (height - 20) + 'px';
-      const offSetHalfHeight = ((height - 24) * 0.5) + 'px';
+      const offSetFullHeight = height + 'px';
+      const offSetHalfHeight = (height * 0.5) + 'px';
 
       let slidesRender = [];
 
@@ -126,7 +126,7 @@ class App extends React.Component {
         const gapsize = 4;
 
         rowRender.push(
-          <Grid gap={gapsize} style={{ margin: '0px' }} key={0}>
+          <Grid gap={gapsize} style={{ margin: '0px', overflow: 'hidden' }} key={0}>
             {firstTwo}
           </Grid>
         );
@@ -134,7 +134,7 @@ class App extends React.Component {
         let allLastContents = contentsRender.slice(2);
         if (allLastContents.length > 0) {
           rowRender.push(
-            <Grid gap={gapsize} style={{ margin: '0px' }} key={1}>
+            <Grid gap={gapsize} style={{ margin: '0px', overflow: 'hidden' }} key={1}>
               {allLastContents}
             </Grid>
           );
