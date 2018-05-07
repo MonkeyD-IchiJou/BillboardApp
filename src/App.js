@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import { Grid } from 'semantic-ui-react'
+import Grid from 'react-css-grid';
 import data from './data.json'
 
 class App extends React.Component {
@@ -29,24 +29,25 @@ class App extends React.Component {
 
   render() {
 
-    const { height, width } = this.state;
+    const { height } = this.state;
     const { config, slides } = data;
 
     // config for react slick
     const settings = {
-      infinite: true,
+      adaptiveHeight: false,
+      arrows: false,
       autoplaySpeed: config.timeout,
-      speed: config.speed,
-      slidesToShow: 1,
-      slidesToScroll: 1,
       autoplay: true,
       centerPadding: 0,
-      adaptiveHeight: true,
-      arrows: false,
-      dots: false
+      dots: false,
+      infinite: true,
+      speed: config.speed,
+      slidesToShow: 1,
+      slidesToScroll: 1
     };
 
-    const renderHeight = height + 'px';
+    const offSetFullHeight = (height - 20) + 'px';
+    const offSetHalfHeight = ((height - 24) * 0.5) + 'px';
 
     let slidesRender = [];
 
@@ -54,6 +55,12 @@ class App extends React.Component {
     slides.forEach((slide, index) => {
 
       let contentsRender = [];
+      const totalContents = slide.contents.length;
+      let contentHeight = offSetFullHeight; // default all contents are full height
+    
+      if(totalContents > 2) {
+        contentHeight = offSetHalfHeight;
+      }
 
       // loop through each contents in this slide
       slide.contents.forEach((content, index) => {
@@ -62,63 +69,44 @@ class App extends React.Component {
         switch (content.type) {
 
           case 'image':
-
             // prepare image ui
             contentsRender.push(
-              <Grid.Column key={index}>
-                <div style={{ backgroundColor: 'black', height: renderHeight }}>
-
-                  <div style={{ height: '0px', color: 'rgba(0, 0, 0, 0.0)' }}>ignore this</div>
-
-                  <div style={{
-                    background: "url(" + content.value + ") no-repeat center center",
-                    width: "100%",
-                    height: "100%"
-                  }} />
-
-                </div>
-              </Grid.Column>
+              <div key={index} style={{ height: contentHeight, backgroundColor: 'black' }}>
+                <div style={{
+                  background: "url(" + content.value + ") no-repeat center center",
+                  width: "100%",
+                  height: "100%"
+                }} />
+              </div>
             );
-
             break;
 
           case 'url':
-
-            // prepare url render ui
+            // prepare url ui
             contentsRender.push(
-              <Grid.Column key={index}>
-                <div style={{ backgroundColor: 'black', height: renderHeight }}>
-
-                  <div style={{ height: '0px', color: 'rgba(0, 0, 0, 0.0)' }}>ignore this</div>
-
-                  <div align="center">
-                    <iframe
-                      title="adf"
-                      width={width + 'px'}
-                      height={height - 4 + 'px'}
-                      frameBorder="0"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src={content.value}>
-                    </iframe>
-                  </div>
-
-                </div>
-              </Grid.Column>
+              <div key={index} align="center">
+                <iframe
+                  title="adf"
+                  width='100%'
+                  height={contentHeight}
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  src={content.value}
+                />
+              </div>
             );
-
             break;
 
           default:
             break;
-
         }
 
-      })
+      });
 
       slidesRender.push(
         <div key={index}>
-          <Grid columns={slide.contents.length} style={{ backgroundColor: 'black' }}>
+          <Grid gap={0} style={{ margin: '0px' }}>
             {contentsRender}
           </Grid>
         </div>
@@ -126,7 +114,7 @@ class App extends React.Component {
 
     });
 
-    return (
+    return(
       <Slider {...settings}>
         {slidesRender}
       </Slider>
@@ -134,4 +122,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App
