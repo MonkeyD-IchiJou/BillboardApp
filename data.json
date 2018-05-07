@@ -9,7 +9,8 @@
             "contents": [
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/NA4fv8t.jpg"
+                    "value": "https://i.imgur.com/NA4fv8t.jpg",
+                    "size": "100%"
                 }
             ]
         },
@@ -27,7 +28,8 @@
             "contents": [
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/FksWs05.jpg"
+                    "value": "https://i.imgur.com/FksWs05.jpg",
+                    "size": "100%"
                 }
             ]
         },
@@ -40,7 +42,8 @@
                 },
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/rhWfYIh.jpg"
+                    "value": "https://i.imgur.com/rhWfYIh.jpg",
+                    "size": "100%"
                 }
             ]
         },
@@ -49,7 +52,8 @@
             "contents": [
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/NUyttbn.gif"
+                    "value": "https://i.imgur.com/NUyttbn.gif",
+                    "size": "500px"
                 }
             ]
         },
@@ -58,7 +62,8 @@
             "contents": [
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/NA4fv8t.jpg"
+                    "value": "https://i.imgur.com/NA4fv8t.jpg",
+                    "size": "100%"
                 },
                 {
                     "type": "url",
@@ -70,7 +75,8 @@
                 },
                 {
                     "type": "image",
-                    "value": "https://i.imgur.com/NA4fv8t.jpg"
+                    "value": "https://i.imgur.com/NA4fv8t.jpg",
+                    "size": "100%"
                 }
             ]
         }

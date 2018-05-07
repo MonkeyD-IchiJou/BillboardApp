@@ -91,7 +91,8 @@ class App extends React.Component {
                   <div style={{
                     background: "url(" + content.value + ") no-repeat center center",
                     width: "100%",
-                    height: "100%"
+                    height: "100%",
+                    backgroundSize: content.size ? content.size : '100%'
                   }} />
                 </div>
               );
