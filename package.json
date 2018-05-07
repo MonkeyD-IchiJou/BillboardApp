@@ -4,12 +4,10 @@
   "private": true,
   "dependencies": {
     "react": "^16.3.2",
+    "react-css-grid": "^2.0.0-0",
     "react-dom": "^16.3.2",
-    "react-iframe": "^1.1.0",
     "react-scripts": "1.1.4",
     "react-slick": "^0.23.1",
-    "semantic-ui-css": "^2.3.0",
-    "semantic-ui-react": "^0.78.3",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
