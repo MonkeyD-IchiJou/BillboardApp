@@ -54,7 +54,6 @@ class App extends React.Component {
     // loop through each slides
     slides.forEach((slide, index) => {
 
-      let contentsRender = [];
       const totalContents = slide.contents.length;
       let contentHeight = offSetFullHeight; // default all contents are full height
     
@@ -62,7 +61,8 @@ class App extends React.Component {
         contentHeight = offSetHalfHeight;
       }
 
-      // loop through each contents in this slide
+      let contentsRender = [];
+
       slide.contents.forEach((content, index) => {
 
         // prepare the UI accordingly based on the content type
@@ -104,11 +104,27 @@ class App extends React.Component {
 
       });
 
+      let rowRender = [];
+
+      let firstTwo = contentsRender.slice(0, 2);
+      rowRender.push(
+        <Grid gap={0} style={{ margin: '0px' }} key={0}>
+            {firstTwo}
+        </Grid>
+      );
+
+      let allLastContents = contentsRender.slice(2);
+      if(allLastContents.length > 0) {
+        rowRender.push(
+          <Grid gap={0} style={{ margin: '0px' }} key={1}>
+              {allLastContents}
+          </Grid>
+        );
+      }
+
       slidesRender.push(
         <div key={index}>
-          <Grid gap={0} style={{ margin: '0px' }}>
-            {contentsRender}
-          </Grid>
+          {rowRender}
         </div>
       );
 
