@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
 import Grid from 'react-css-grid';
-import data from './data.json'
 
 class App extends React.Component {
 
@@ -10,13 +9,26 @@ class App extends React.Component {
 
     this.state = {
       width: 0,
-      height: 0
+      height: 0,
+      data: {}
     };
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
+
+    const url = "https://s3-ap-southeast-1.amazonaws.com/billboardapp4wework/data.json"
+
+    fetch(url)
+      .then((resp) => resp.json()) // Transform the data into json
+      .then((data) => {
+        // set the data into my state
+        this.setState({data: data})
+      })
+      .catch((e) => {
+        // if got any errors
+      });
   }
 
   componentWillUnmount() {
@@ -29,112 +41,120 @@ class App extends React.Component {
 
   render() {
 
-    const { height } = this.state;
-    const { config, slides } = data;
+    const { height, data } = this.state;
 
-    // config for react slick
-    const settings = {
-      adaptiveHeight: false,
-      arrows: false,
-      autoplaySpeed: config.timeout,
-      autoplay: true,
-      centerPadding: 0,
-      dots: false,
-      infinite: true,
-      speed: config.speed,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
+    // make sure the data is not empty
+    if (data.config) {
 
-    const offSetFullHeight = (height - 20) + 'px';
-    const offSetHalfHeight = ((height - 24) * 0.5) + 'px';
+      const { config, slides } = data;
 
-    let slidesRender = [];
+      // config for react slick
+      const settings = {
+        adaptiveHeight: false,
+        arrows: false,
+        autoplaySpeed: config.timeout,
+        autoplay: true,
+        centerPadding: 0,
+        dots: false,
+        infinite: true,
+        speed: config.speed,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
 
-    // loop through each slides
-    slides.forEach((slide, index) => {
+      const offSetFullHeight = (height - 20) + 'px';
+      const offSetHalfHeight = ((height - 24) * 0.5) + 'px';
 
-      const totalContents = slide.contents.length;
-      let contentHeight = offSetFullHeight; // default all contents are full height
-    
-      if(totalContents > 2) {
-        contentHeight = offSetHalfHeight;
-      }
+      let slidesRender = [];
 
-      let contentsRender = [];
+      // loop through each slides
+      slides.forEach((slide, index) => {
 
-      slide.contents.forEach((content, index) => {
+        const totalContents = slide.contents.length;
+        let contentHeight = offSetFullHeight; // default all contents are full height
 
-        // prepare the UI accordingly based on the content type
-        switch (content.type) {
-
-          case 'image':
-            // prepare image ui
-            contentsRender.push(
-              <div key={index} style={{ height: contentHeight, backgroundColor: 'black' }}>
-                <div style={{
-                  background: "url(" + content.value + ") no-repeat center center",
-                  width: "100%",
-                  height: "100%"
-                }} />
-              </div>
-            );
-            break;
-
-          case 'url':
-            // prepare url ui
-            contentsRender.push(
-              <div key={index} align="center">
-                <iframe
-                  title="adf"
-                  width='100%'
-                  height={contentHeight}
-                  frameBorder="0"
-                  marginHeight="0"
-                  marginWidth="0"
-                  src={content.value}
-                />
-              </div>
-            );
-            break;
-
-          default:
-            break;
+        if (totalContents > 2) {
+          contentHeight = offSetHalfHeight;
         }
+
+        let contentsRender = [];
+
+        slide.contents.forEach((content, index) => {
+
+          // prepare the UI accordingly based on the content type
+          switch (content.type) {
+
+            case 'image':
+              // prepare image ui
+              contentsRender.push(
+                <div key={index} style={{ height: contentHeight, backgroundColor: 'black' }}>
+                  <div style={{
+                    background: "url(" + content.value + ") no-repeat center center",
+                    width: "100%",
+                    height: "100%"
+                  }} />
+                </div>
+              );
+              break;
+
+            case 'url':
+              // prepare url ui
+              contentsRender.push(
+                <div key={index} align="center">
+                  <iframe
+                    title="adf"
+                    width='100%'
+                    height={contentHeight}
+                    frameBorder="0"
+                    marginHeight="0"
+                    marginWidth="0"
+                    src={content.value}
+                  />
+                </div>
+              );
+              break;
+
+            default:
+              break;
+          }
+
+        });
+
+        let rowRender = [];
+
+        let firstTwo = contentsRender.slice(0, 2);
+        rowRender.push(
+          <Grid gap={0} style={{ margin: '0px' }} key={0}>
+            {firstTwo}
+          </Grid>
+        );
+
+        let allLastContents = contentsRender.slice(2);
+        if (allLastContents.length > 0) {
+          rowRender.push(
+            <Grid gap={0} style={{ margin: '0px' }} key={1}>
+              {allLastContents}
+            </Grid>
+          );
+        }
+
+        slidesRender.push(
+          <div key={index}>
+            {rowRender}
+          </div>
+        );
 
       });
 
-      let rowRender = [];
-
-      let firstTwo = contentsRender.slice(0, 2);
-      rowRender.push(
-        <Grid gap={0} style={{ margin: '0px' }} key={0}>
-            {firstTwo}
-        </Grid>
+      return (
+        <Slider {...settings}>
+          {slidesRender}
+        </Slider>
       );
-
-      let allLastContents = contentsRender.slice(2);
-      if(allLastContents.length > 0) {
-        rowRender.push(
-          <Grid gap={0} style={{ margin: '0px' }} key={1}>
-              {allLastContents}
-          </Grid>
-        );
-      }
-
-      slidesRender.push(
-        <div key={index}>
-          {rowRender}
-        </div>
-      );
-
-    });
-
-    return(
-      <Slider {...settings}>
-        {slidesRender}
-      </Slider>
-    );
+    }
+    else {
+      return(<div>loading</div>)
+    }
   }
 }
 
