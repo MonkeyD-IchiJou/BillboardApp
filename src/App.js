@@ -123,8 +123,10 @@ class App extends React.Component {
         let rowRender = [];
 
         let firstTwo = contentsRender.slice(0, 2);
+        const gapsize = 4;
+
         rowRender.push(
-          <Grid gap={0} style={{ margin: '0px' }} key={0}>
+          <Grid gap={gapsize} style={{ margin: '0px' }} key={0}>
             {firstTwo}
           </Grid>
         );
@@ -132,7 +134,7 @@ class App extends React.Component {
         let allLastContents = contentsRender.slice(2);
         if (allLastContents.length > 0) {
           rowRender.push(
-            <Grid gap={0} style={{ margin: '0px' }} key={1}>
+            <Grid gap={gapsize} style={{ margin: '0px' }} key={1}>
               {allLastContents}
             </Grid>
           );
