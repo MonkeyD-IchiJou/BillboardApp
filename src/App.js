@@ -87,7 +87,7 @@ class App extends React.Component {
             case 'image':
               // prepare image ui
               contentsRender.push(
-                <div style={{
+                <div key={index} style={{
                   background: "url(" + content.value + ") no-repeat center center",
                   width: "100%",
                   height: contentHeight,
@@ -107,6 +107,7 @@ class App extends React.Component {
                   marginHeight="0"
                   marginWidth="0"
                   src={content.value}
+                  key={index}
                 />
               );
               break;
@@ -117,29 +118,31 @@ class App extends React.Component {
 
         });
 
-        let rowRender = [];
-
-        let firstTwo = contentsRender.slice(0, 2);
+        let rowsRender = [];
         const gapsize = 4;
 
-        rowRender.push(
+        // get the first 2 contents
+        let firstRow = contentsRender.slice(0, 2);
+        
+        rowsRender.push(
           <Grid gap={gapsize} style={{ margin: '0px', overflow: 'hidden' }} key={0}>
-            {firstTwo}
+            {firstRow}
           </Grid>
         );
 
-        let allLastContents = contentsRender.slice(2);
-        if (allLastContents.length > 0) {
-          rowRender.push(
+        // get the last 2 contents
+        let secondRow = contentsRender.slice(2);
+        if (secondRow.length > 0) {
+          rowsRender.push(
             <Grid gap={gapsize} style={{ margin: '0px', overflow: 'hidden' }} key={1}>
-              {allLastContents}
+              {secondRow}
             </Grid>
           );
         }
 
         slidesRender.push(
           <div key={index}>
-            {rowRender}
+            {rowsRender}
           </div>
         );
 
